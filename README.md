@@ -1,6 +1,6 @@
 # Login
 
-Este proyecto es una interfaz de login moderna y profesional, con las siguientes características:
+Este proyecto es una interfaz de login que cumple con las siguientes características:
 
 ## Características
 - **Diseño responsive** y minimalista, con dos secciones principales:
