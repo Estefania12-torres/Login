@@ -32,9 +32,13 @@ document.addEventListener('DOMContentLoaded', function () {
   if (signUpBtn) signUpBtn.addEventListener('click', showSignup);
   if (toSignUp) toSignUp.addEventListener('click', showSignup);
   if (toSignIn) toSignIn.addEventListener('click', showLogin);
-  if (signUpLink) signUpLink.addEventListener('click', function(e) {
-    e.preventDefault();
-    showSignup();
+
+  // Asegura que el enlace funcione incluso si se recarga el DOM
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'signUpLink') {
+      e.preventDefault();
+      showSignup();
+    }
   });
 
   // Basic login validation
@@ -86,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Mostrar modal al hacer clic en cualquier enlace 'Forgot password?'
-  if (forgotLinks && forgotModal && forgotForm && forgotMsg) {
+  if (forgotLinks && forgotLinks.length && forgotModal && forgotForm && forgotMsg) {
     forgotLinks.forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
@@ -95,13 +99,13 @@ document.addEventListener('DOMContentLoaded', function () {
         forgotForm.reset();
       });
     });
-    // Cerrar modal
+    // Cerrar modal al hacer clic en la X
     if (closeModal) {
       closeModal.addEventListener('click', function() {
         forgotModal.style.display = 'none';
       });
     }
-    // Solo cerrar modal si el target es el fondo, no el contenido
+    // Cerrar modal al hacer clic fuera del contenido
     window.addEventListener('mousedown', function(e) {
       if (e.target === forgotModal) {
         forgotModal.style.display = 'none';
